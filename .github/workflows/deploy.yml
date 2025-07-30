@@ -1,0 +1,25 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+        working-directory: ./shelf-scanner-admin
+      - run: npm run build
+        working-directory: ./shelf-scanner-admin
+      - run: npm install -g firebase-tools
+      # The Firebase token must be stored as a secret named FIREBASE_TOKEN
+      - run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+        env:
+          CI: true
+        working-directory: ./shelf-scanner-admin

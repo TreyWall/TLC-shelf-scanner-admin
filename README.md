@@ -77,3 +77,4 @@ Firestore rules are defined in `firebase.rules` to enforce that only users with 
 
 - The `ReportsDashboard` currently aggregates counts of job statuses. You can extend this to compute additional metrics or integrate with Google Sheets for exports.
 - Cloud Functions used by the mobile app (for OCR) live in the `/functions` directory in the root of this monorepo.
+<!-- trigger CI -->
